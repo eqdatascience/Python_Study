@@ -1,14 +1,11 @@
+# Refactored code
+
 def pipeline(*funcs):
-    funcs = [i for i in funcs[::-1]]
-
     def helper(arg):
-        if funcs:
-            arg = funcs.pop()(arg)
-            if funcs:
-                return helper(arg)
-            else:
-                return arg
-
+        temp = arg
+        for func in funcs:
+            temp = func(temp)
+        return temp
 
     return helper
 
